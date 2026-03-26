@@ -172,9 +172,12 @@ function renderizar() {
     }
 
     buscaInput.value = "";
-    ultimoEstadoBusca = "";
 
-    renderizar(); // 🔥 força atualizar a tabela
+    setTimeout(() => {
+      ultimoEstadoBusca = "";
+      renderizar();
+    }, 0);
+
     return;
   }
 
