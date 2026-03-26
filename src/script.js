@@ -86,7 +86,7 @@ function renderizar() {
     const matchTipo = tiposSelecionados.includes(item.tipo);
 
     return matchBusca && matchTipo;
-  });
+  }).sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR'));
 
   const tabela = document.getElementById('tabela');
   tabela.innerHTML = '';
