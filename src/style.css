@@ -132,15 +132,8 @@ body {
       background: #ccc;
       border-radius: 10px;
     }
-    body.rainbow, body.rainbow .tabela-container {
-      background: linear-gradient(270deg, LightPink);
-      background-size: 1400% 1400%;
-    }
-
-    @keyframes rainbowBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    body.rainbow {
+      background: LightPink;
     }
 
 /* 🔥 brilho do cursor */
