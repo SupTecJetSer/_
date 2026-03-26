@@ -2,6 +2,8 @@ let dados = [];
 let indiceSelecionado = -1;
 let brilhoAtivo = false;
 let cursorGlow = null;
+let easterLigado = false;
+let ultimoEstadoBusca = "";
 
 let ordemAtual = {
   coluna: 'codigo',
@@ -99,6 +101,19 @@ function ordenarPor(coluna) {
 }
 
 // 🔥 SPARKLE
+function ativarEaster() {
+  document.body.classList.add("rainbow");
+  brilhoAtivo = true;
+  criarCursorGlow();
+  easterLigado = true;
+}
+
+function desativarEaster() {
+  document.body.classList.remove("rainbow");
+  brilhoAtivo = false;
+  removerCursorGlow();
+  easterLigado = false;
+}
 function criarCursorGlow() {
   if (cursorGlow) return;
 
@@ -140,17 +155,24 @@ function criarRastro(x, y) {
 
 // 🔥 RENDERIZAÇÃO
 function renderizar() {
-  const termo = document.getElementById('busca').value.toLowerCase();
-  // 🎉 EASTER EGG
-  if (termo.includes("yasmin")) {
-    document.body.classList.add("rainbow");
-    brilhoAtivo = true;
-    criarCursorGlow();
+  const buscaInput = document.getElementById('busca');
+const termoOriginal = buscaInput.value;
+const termo = termoOriginal.toLowerCase();
+
+// 🔥 DETECTA DIGITAÇÃO NOVA (evita loop)
+if (termo.includes("yasmin") && !ultimoEstadoBusca.includes("yasmin")) {
+  
+  if (easterLigado) {
+    desativarEaster();
   } else {
-    document.body.classList.remove("rainbow");
-    brilhoAtivo = false;
-    removerCursorGlow();
+    ativarEaster();
   }
+
+  // opcional: limpa o input depois de ativar
+  buscaInput.value = "";
+}
+
+ultimoEstadoBusca = termo;
   const tiposSelecionados = getTiposSelecionados();
 
   const filtrados = dados
