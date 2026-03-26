@@ -132,7 +132,7 @@ body {
       background: #ccc;
       border-radius: 10px;
     }
-    body.rainbow .tabela-container {
+    body.rainbow, .tabela-container {
       background: linear-gradient(270deg, red, orange, yellow, green, blue, indigo, violet);
       background-size: 1400% 1400%;
       animation: rainbowBG 5s ease infinite;
