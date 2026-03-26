@@ -154,7 +154,7 @@ body.rainbow #tabela tr {
 }
 
 body.rainbow #tabela th {
-  background-color: LightPink !important;
+  background: LightPink !important;
 }
 
 /* hover volta para cores originais */
