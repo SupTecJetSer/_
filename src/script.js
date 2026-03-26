@@ -29,7 +29,7 @@ function copiarCodigo(codigo, el) {
   }
 
   if (icon) {
-    icon.innerHTML = "✔️";
+    icon.innerHTML = "✅";
 
     el._copyTimeout = setTimeout(() => {
       icon.innerHTML = "";
