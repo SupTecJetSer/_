@@ -1,4 +1,28 @@
 [{
+	"tipo": "sulfite",
+	"codigo": "PAPLF901",
+	"nome": "PACOTE SULFITE A4 90GR LF 5KG"
+},{
+	"tipo": "sulfite",
+	"codigo": "PAPLF751",
+	"nome": "PACOTE SULFITE A4 75GR LF 5KG"
+},{
+	"tipo": "sulfite",
+	"codigo": "DPA4BC",
+	"nome": "PACOTE SULFITE A4 75GR EXECUTIVE"
+},{
+	"tipo": "sulfite",
+	"codigo": "V14289",
+	"nome": "PACOTE SULFITE A4 75GR AUTOPAPER"
+},{
+	"tipo": "sulfite",
+	"codigo": "03071740343",
+	"nome": "PACOTE SULFITE A4 75GR CHAMEX"
+},{
+	"tipo": "sulfite",
+	"codigo": "000000000020091915",
+	"nome": "PACOTE SULFITE A4 75GR REPORT"
+},{
 	"tipo": "compativel",
 	"codigo": "15554-0",
 	"nome": "TONER COMP HP 435 436 285 EVOLUT SUPREME"
