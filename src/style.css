@@ -207,13 +207,13 @@ body.rainbow .copiado td {
 /* rastro */
 .sparkle {
   position: fixed;
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   pointer-events: none;
   z-index: 9998;
   background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
-  animation: fadeOut 0.7s linear forwards;
+  animation: fadeOut 1.5s linear forwards;
 }
 
 @keyframes pulsar {
