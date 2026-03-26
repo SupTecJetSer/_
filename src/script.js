@@ -90,6 +90,14 @@ document.addEventListener('keydown', function(e) {
 });
 
 function renderizar() {
+  document.querySelectorAll('th').forEach(th => th.innerHTML = th.textContent);
+
+  if (ordemAtual.coluna) {
+    const th = document.querySelector(`th[onclick*="${ordemAtual.coluna}"]`);
+    if (th) {
+      th.innerHTML += ordemAtual.asc ? " ↑" : " ↓";
+    }
+  }
   const termo = document.getElementById('busca').value.toLowerCase();
   const tiposSelecionados = getTiposSelecionados();
 
