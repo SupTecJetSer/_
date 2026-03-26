@@ -1,5 +1,6 @@
 let dados = [];
 let indiceSelecionado = -1;
+let brilhoAtivo = false;
 
 let ordemAtual = {
   coluna: 'codigo',
@@ -96,14 +97,38 @@ function ordenarPor(coluna) {
   renderizar();
 }
 
+// 🔥 SPARKLE
+document.addEventListener("mousemove", (e) => {
+  if (!brilhoAtivo) return;
+
+  // cria menos partículas (leve)
+  if (Math.random() < 0.3) {
+    criarBrilho(e.clientX, e.clientY);
+  }
+});
+
+function criarBrilho(x, y) {
+  const brilho = document.createElement("div");
+  brilho.className = "sparkle";
+
+  brilho.style.left = x + "px";
+  brilho.style.top = y + "px";
+
+  document.body.appendChild(brilho);
+
+  setTimeout(() => brilho.remove(), 600);
+}
+
 // 🔥 RENDERIZAÇÃO
 function renderizar() {
   const termo = document.getElementById('busca').value.toLowerCase();
   // 🎉 EASTER EGG
   if (termo.includes("yasmin")) {
     document.body.classList.add("rainbow");
+    brilhoAtivo = true;
   } else {
     document.body.classList.remove("rainbow");
+    brilhoAtivo = false;
   }
   const tiposSelecionados = getTiposSelecionados();
 
