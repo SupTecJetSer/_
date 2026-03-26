@@ -173,7 +173,9 @@ function renderizar() {
 
     buscaInput.value = "";
     ultimoEstadoBusca = "";
-    return; // 🔥 evita bug
+
+    renderizar(); // 🔥 força atualizar a tabela
+    return;
   }
 
   ultimoEstadoBusca = termo;
