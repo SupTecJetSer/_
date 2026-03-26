@@ -153,6 +153,10 @@ body.rainbow #tabela tr {
   background-color: LightPink !important;
 }
 
+body.rainbow #tabela th {
+  background-color: LightPink !important;
+}
+
 /* hover volta para cores originais */
 body.rainbow #tabela tr.original:hover {
   background-color: #e6f4ea !important;
