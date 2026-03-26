@@ -155,7 +155,7 @@ body.rainbow #tabela tr {
 
 /* 🔥 HEADER (Código / Nome) também rosa */
 body.rainbow th {
-  background: LightPink !important;
+  background: #ffb6c1 !important;
 }
 
 /* hover volta para cores originais */
