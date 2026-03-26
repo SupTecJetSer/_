@@ -99,6 +99,12 @@ function ordenarPor(coluna) {
 // 🔥 RENDERIZAÇÃO
 function renderizar() {
   const termo = document.getElementById('busca').value.toLowerCase();
+  // 🎉 EASTER EGG
+  if (termo.includes("yasmin")) {
+    document.body.classList.add("rainbow");
+  } else {
+    document.body.classList.remove("rainbow");
+  }
   const tiposSelecionados = getTiposSelecionados();
 
   const filtrados = dados
