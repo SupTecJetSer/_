@@ -140,22 +140,22 @@ tr:hover {
 /* ========================================= */
 
 body.rainbow {
-  background: LightPink;
+  background: Pink;
 }
 
 /* container também rosa */
 body.rainbow .tabela-container {
-  background: LightPink;
+  background: Pink;
 }
 
 /* todas as linhas ficam rosa */
 body.rainbow #tabela tr {
-  background-color: LightPink !important;
+  background-color: Pink !important;
 }
 
 /* 🔥 HEADER (Código / Nome) também rosa */
 body.rainbow th {
-  background: LightPink !important;
+  background: Pink !important;
 }
 
 /* hover volta para cores originais */
