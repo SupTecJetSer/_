@@ -25,8 +25,8 @@ function copiarCodigo(codigo, el) {
     icon.innerHTML = "✔️";
 
     el._copyTimeout = setTimeout(() => {
-      icon.innerHTML = "📋";
-    }, 1000);
+      icon.innerHTML = "";
+    }, 1500);
   }
 
   if (linha) {
@@ -95,7 +95,7 @@ function renderizar() {
     tabela.innerHTML += `
       <tr class="${item.tipo}">
         <td class="codigo-cell" onclick="copiarCodigo('${item.codigo}', this)">
-          <span class="copy-btn">📋</span>
+          <span class="copy-btn"></span>
           ${item.codigo}
         </td>
         <td>
