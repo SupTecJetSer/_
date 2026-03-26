@@ -170,6 +170,7 @@ if (termo.includes("yasmin") && !ultimoEstadoBusca.includes("yasmin")) {
 
   // opcional: limpa o input depois de ativar
   buscaInput.value = "";
+setTimeout(() => renderizar(), 0);
 }
 
 ultimoEstadoBusca = termo;
