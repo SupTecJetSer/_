@@ -153,7 +153,8 @@ body.rainbow #tabela tr {
   background-color: LightPink !important;
 }
 
-body.rainbow #tabela th {
+/* 🔥 HEADER (Código / Nome) também rosa */
+body.rainbow th {
   background: LightPink !important;
 }
 
