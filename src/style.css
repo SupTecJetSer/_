@@ -77,7 +77,7 @@ body {
 
     .original { background-color: #e6f4ea; }
     .compativel { background-color: #f1f3f5; }
-    .remanufaturado { background-color: #fff8e1; }
+    .sulfite { background-color: #fff8e1; }
 
     .badge {
       margin-left: 10px;
@@ -89,7 +89,7 @@ body {
 
     .badge.original { background: #28a745; }
     .badge.compativel { background: #6c757d; }
-    .badge.remanufaturado { background: #ffc107; color: #000; }
+    .badge.sulfite { background: #ffc107; color: #000; }
 
     tr {
       transition: background 0.2s;
