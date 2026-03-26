@@ -1,21 +1,12 @@
+let dados = [];
+let indiceSelecionado = -1;
+
 let ordemAtual = {
   coluna: null,
   asc: true
 };
-let dados = [];
-let indiceSelecionado = -1;
 
-function ordenarPor(coluna) {
-  if (ordemAtual.coluna === coluna) {
-    ordemAtual.asc = !ordemAtual.asc;
-  } else {
-    ordemAtual.coluna = coluna;
-    ordemAtual.asc = true;
-  }
-
-  renderizar();
-}
-
+// 🔥 CARREGAR JSON DO GITHUB
 async function carregarDados() {
   try {
     const res = await fetch("https://raw.githubusercontent.com/SupTecJetSer/_/refs/heads/main/dados.json?nocache=" + Date.now());
@@ -26,6 +17,7 @@ async function carregarDados() {
   }
 }
 
+// 🔥 COPIAR CÓDIGO
 function copiarCodigo(codigo, el) {
   navigator.clipboard.writeText(codigo);
 
@@ -40,8 +32,8 @@ function copiarCodigo(codigo, el) {
     icon.innerHTML = "✔️";
 
     el._copyTimeout = setTimeout(() => {
-      icon.innerHTML = "";
-    }, 1500);
+      icon.innerHTML = "📋";
+    }, 1000);
   }
 
   if (linha) {
@@ -51,11 +43,13 @@ function copiarCodigo(codigo, el) {
   }
 }
 
+// 🔥 FILTROS
 function getTiposSelecionados() {
   return Array.from(document.querySelectorAll('.filtros input:checked'))
     .map(el => el.value);
 }
 
+// 🔥 SELEÇÃO COM TECLADO
 function atualizarSelecao(linhas) {
   linhas.forEach(l => l.classList.remove('selecionado'));
 
@@ -65,6 +59,7 @@ function atualizarSelecao(linhas) {
   }
 }
 
+// 🔥 NAVEGAÇÃO
 document.addEventListener('keydown', function(e) {
   const linhas = document.querySelectorAll('#tabela tr');
 
@@ -89,36 +84,53 @@ document.addEventListener('keydown', function(e) {
   }
 });
 
-function renderizar() {
-  document.querySelectorAll('th').forEach(th => th.innerHTML = th.textContent);
-
-  if (ordemAtual.coluna) {
-    const th = document.querySelector(`th[onclick*="${ordemAtual.coluna}"]`);
-    if (th) {
-      th.innerHTML += ordemAtual.asc ? " ↑" : " ↓";
-    }
+// 🔥 ORDENAÇÃO
+function ordenarPor(coluna) {
+  if (ordemAtual.coluna === coluna) {
+    ordemAtual.asc = !ordemAtual.asc;
+  } else {
+    ordemAtual.coluna = coluna;
+    ordemAtual.asc = true;
   }
+
+  renderizar();
+}
+
+// 🔥 RENDERIZAÇÃO
+function renderizar() {
   const termo = document.getElementById('busca').value.toLowerCase();
   const tiposSelecionados = getTiposSelecionados();
 
-  const filtrados = dados.filter(item => {
-    const matchBusca =
-      item.codigo.toLowerCase().includes(termo) ||
-      item.nome.toLowerCase().includes(termo);
+  const filtrados = dados
+    .filter(item => {
+      const matchBusca =
+        item.codigo.toLowerCase().includes(termo) ||
+        item.nome.toLowerCase().includes(termo);
 
-    const matchTipo = tiposSelecionados.includes(item.tipo);
+      const matchTipo = tiposSelecionados.includes(item.tipo);
 
-    return matchBusca && matchTipo;
-  }).sort((a, b) => {
-    if (!ordemAtual.coluna) return 0;
+      return matchBusca && matchTipo;
+    })
+    .sort((a, b) => {
+      if (!ordemAtual.coluna) return 0;
 
-    const valorA = a[ordemAtual.coluna].toLowerCase();
-    const valorB = b[ordemAtual.coluna].toLowerCase();
+      let valorA = a[ordemAtual.coluna];
+      let valorB = b[ordemAtual.coluna];
 
-    const comparacao = valorA.localeCompare(valorB, 'pt-BR');
+      // 🔥 trata número corretamente
+      if (ordemAtual.coluna === 'codigo') {
+        return ordemAtual.asc
+          ? valorA.localeCompare(valorB, 'pt-BR', { numeric: true })
+          : valorB.localeCompare(valorA, 'pt-BR', { numeric: true });
+      }
 
-    return ordemAtual.asc ? comparacao : -comparacao;
-  });
+      valorA = valorA.toLowerCase();
+      valorB = valorB.toLowerCase();
+
+      const comparacao = valorA.localeCompare(valorB, 'pt-BR');
+
+      return ordemAtual.asc ? comparacao : -comparacao;
+    });
 
   const tabela = document.getElementById('tabela');
   tabela.innerHTML = '';
@@ -127,7 +139,7 @@ function renderizar() {
     tabela.innerHTML += `
       <tr class="${item.tipo}">
         <td class="codigo-cell" onclick="copiarCodigo('${item.codigo}', this)">
-          <span class="copy-btn"></span>
+          <span class="copy-btn">📋</span>
           ${item.codigo}
         </td>
         <td>
@@ -140,11 +152,25 @@ function renderizar() {
     `;
   });
 
+  // 🔥 CORRIGE SETAS (SEM DUPLICAR)
+  document.querySelectorAll('th').forEach(th => {
+    th.innerHTML = th.dataset.label;
+  });
+
+  if (ordemAtual.coluna) {
+    const th = document.querySelector(`th[onclick*="${ordemAtual.coluna}"]`);
+    if (th) {
+      th.innerHTML += ordemAtual.asc ? " ↑" : " ↓";
+    }
+  }
+
   indiceSelecionado = -1;
 }
 
+// 🔥 EVENTOS
 document.getElementById('busca').addEventListener('input', renderizar);
 document.querySelectorAll('.filtros input')
   .forEach(el => el.addEventListener('change', renderizar));
 
+// 🔥 INICIAR
 carregarDados();
