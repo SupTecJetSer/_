@@ -139,9 +139,12 @@ document.addEventListener("mousemove", (e) => {
     cursorGlow.style.top = e.clientY + "px";
   }
 
-  // rastro mais visível
-  if (Math.random() < 0.4) {
-    criarRastro(e.clientX, e.clientY);
+  // mais partículas por movimento
+  for (let i = 0; i < 3; i++) {
+    criarRastro(
+      e.clientX + (Math.random() - 0.5) * 10,
+      e.clientY + (Math.random() - 0.5) * 10
+    );
   }
 });
 
@@ -154,7 +157,7 @@ function criarRastro(x, y) {
 
   document.body.appendChild(rastro);
 
-  setTimeout(() => rastro.remove(), 700);
+  setTimeout(() => rastro.remove(), 1500);
 }
 
 // 🔥 RENDERIZAÇÃO
