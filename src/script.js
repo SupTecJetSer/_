@@ -1,5 +1,20 @@
+let ordemAtual = {
+  coluna: null,
+  asc: true
+};
 let dados = [];
 let indiceSelecionado = -1;
+
+function ordenarPor(coluna) {
+  if (ordemAtual.coluna === coluna) {
+    ordemAtual.asc = !ordemAtual.asc;
+  } else {
+    ordemAtual.coluna = coluna;
+    ordemAtual.asc = true;
+  }
+
+  renderizar();
+}
 
 async function carregarDados() {
   try {
@@ -86,7 +101,16 @@ function renderizar() {
     const matchTipo = tiposSelecionados.includes(item.tipo);
 
     return matchBusca && matchTipo;
-  }).sort((a, b) => a.nome.localeCompare(b.nome, 'pt-BR'));
+  }).sort((a, b) => {
+    if (!ordemAtual.coluna) return 0;
+
+    const valorA = a[ordemAtual.coluna].toLowerCase();
+    const valorB = b[ordemAtual.coluna].toLowerCase();
+
+    const comparacao = valorA.localeCompare(valorB, 'pt-BR');
+
+    return ordemAtual.asc ? comparacao : -comparacao;
+  });
 
   const tabela = document.getElementById('tabela');
   tabela.innerHTML = '';
