@@ -1,6 +1,5 @@
 let dados = [];
 let indiceSelecionado = -1;
-let brilhoAtivo = false;
 let cursorGlow = null;
 let easterLigado = false;
 let ultimoEstadoBusca = "";
@@ -59,7 +58,10 @@ function atualizarSelecao(linhas) {
 
   if (linhas[indiceSelecionado]) {
     linhas[indiceSelecionado].classList.add('selecionado');
-    linhas[indiceSelecionado].scrollIntoView({ block: "nearest" });
+    linhas[indiceSelecionado].scrollIntoView({
+      block: "nearest",
+      behavior: "smooth"
+    });
   }
 }
 
@@ -100,20 +102,19 @@ function ordenarPor(coluna) {
   renderizar();
 }
 
-// 🔥 SPARKLE
+// 🔥 EASTER / SPARKLE
 function ativarEaster() {
   document.body.classList.add("rainbow");
-  brilhoAtivo = true;
   criarCursorGlow();
   easterLigado = true;
 }
 
 function desativarEaster() {
   document.body.classList.remove("rainbow");
-  brilhoAtivo = false;
   removerCursorGlow();
   easterLigado = false;
 }
+
 function criarCursorGlow() {
   if (cursorGlow) return;
 
@@ -121,22 +122,25 @@ function criarCursorGlow() {
   cursorGlow.className = "cursor-glow";
   document.body.appendChild(cursorGlow);
 }
+
 function removerCursorGlow() {
   if (cursorGlow) {
     cursorGlow.remove();
     cursorGlow = null;
   }
 }
+
+// 🔥 MOUSE GLOW + RASTRO
 document.addEventListener("mousemove", (e) => {
-  if (!brilhoAtivo) return;
+  if (!easterLigado) return;
 
   if (cursorGlow) {
     cursorGlow.style.left = e.clientX + "px";
     cursorGlow.style.top = e.clientY + "px";
   }
 
-  // rastro leve
-  if (Math.random() < 0.25) {
+  // rastro mais visível
+  if (Math.random() < 0.4) {
     criarRastro(e.clientX, e.clientY);
   }
 });
@@ -156,51 +160,51 @@ function criarRastro(x, y) {
 // 🔥 RENDERIZAÇÃO
 function renderizar() {
   const buscaInput = document.getElementById('busca');
-const termoOriginal = buscaInput.value;
-const termo = termoOriginal.toLowerCase();
+  const termoOriginal = buscaInput.value;
+  const termo = termoOriginal.toLowerCase();
 
-// 🔥 DETECTA DIGITAÇÃO NOVA (evita loop)
-if (termo.includes("yasmin") && !ultimoEstadoBusca.includes("yasmin")) {
-  
-  if (easterLigado) {
-    desativarEaster();
-  } else {
-    ativarEaster();
+  // 🔥 DETECTA PALAVRA SECRETA
+  if (termo.includes("yasmin") && !ultimoEstadoBusca.includes("yasmin")) {
+    if (easterLigado) {
+      desativarEaster();
+    } else {
+      ativarEaster();
+    }
+
+    buscaInput.value = "";
+    ultimoEstadoBusca = "";
+    return; // 🔥 evita bug
   }
 
-  // opcional: limpa o input depois de ativar
-  buscaInput.value = "";
-setTimeout(() => renderizar(), 0);
-}
+  ultimoEstadoBusca = termo;
 
-ultimoEstadoBusca = termo;
   const tiposSelecionados = getTiposSelecionados();
 
   const filtrados = dados
     .filter(item => {
+      const codigo = (item.codigo || "").toLowerCase();
+      const nome = (item.nome || "").toLowerCase();
+
       const matchBusca =
-        item.codigo.toLowerCase().includes(termo) ||
-        item.nome.toLowerCase().includes(termo);
+        codigo.includes(termo) ||
+        nome.includes(termo);
 
       const matchTipo = tiposSelecionados.includes(item.tipo);
 
       return matchBusca && matchTipo;
     })
     .sort((a, b) => {
-      if (!ordemAtual.coluna) return 0;
-
       let valorA = a[ordemAtual.coluna];
       let valorB = b[ordemAtual.coluna];
 
-      // 🔥 trata número corretamente
       if (ordemAtual.coluna === 'codigo') {
         return ordemAtual.asc
-          ? valorA.localeCompare(valorB, 'pt-BR', { numeric: true })
-          : valorB.localeCompare(valorA, 'pt-BR', { numeric: true });
+          ? String(valorA).localeCompare(String(valorB), 'pt-BR', { numeric: true })
+          : String(valorB).localeCompare(String(valorA), 'pt-BR', { numeric: true });
       }
 
-      valorA = valorA.toLowerCase();
-      valorB = valorB.toLowerCase();
+      valorA = String(valorA).toLowerCase();
+      valorB = String(valorB).toLowerCase();
 
       const comparacao = valorA.localeCompare(valorB, 'pt-BR');
 
@@ -208,10 +212,11 @@ ultimoEstadoBusca = termo;
     });
 
   const tabela = document.getElementById('tabela');
-  tabela.innerHTML = '';
+
+  let html = "";
 
   filtrados.forEach(item => {
-    tabela.innerHTML += `
+    html += `
       <tr class="${item.tipo}">
         <td class="codigo-cell" onclick="copiarCodigo('${item.codigo}', this)">
           <span class="copy-btn"></span>
@@ -227,16 +232,16 @@ ultimoEstadoBusca = termo;
     `;
   });
 
-  // 🔥 CORRIGE SETAS (SEM DUPLICAR)
+  tabela.innerHTML = html;
+
+  // 🔥 CORRIGE SETAS
   document.querySelectorAll('th').forEach(th => {
     th.innerHTML = th.dataset.label;
   });
 
-  if (ordemAtual.coluna) {
-    const th = document.querySelector(`th[onclick*="${ordemAtual.coluna}"]`);
-    if (th) {
-      th.innerHTML += ordemAtual.asc ? " ↑" : " ↓";
-    }
+  const th = document.querySelector(`th[onclick*="${ordemAtual.coluna}"]`);
+  if (th) {
+    th.innerHTML += ordemAtual.asc ? " ↑" : " ↓";
   }
 
   indiceSelecionado = -1;
@@ -244,6 +249,7 @@ ultimoEstadoBusca = termo;
 
 // 🔥 EVENTOS
 document.getElementById('busca').addEventListener('input', renderizar);
+
 document.querySelectorAll('.filtros input')
   .forEach(el => el.addEventListener('change', renderizar));
 
