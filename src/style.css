@@ -133,15 +133,13 @@ body {
       border-radius: 10px;
     }
     body.rainbow {
-      animation: rainbowBG 3s linear infinite;
+      background: linear-gradient(270deg, red, orange, yellow, green, blue, indigo, violet);
+      background-size: 1400% 1400%;
+      animation: rainbowBG 5s ease infinite;
     }
 
     @keyframes rainbowBG {
-      0%   { background-color: red; }
-      16%  { background-color: orange; }
-      33%  { background-color: yellow; }
-      50%  { background-color: green; }
-      66%  { background-color: blue; }
-      83%  { background-color: indigo; }
-      100% { background-color: violet; }
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
