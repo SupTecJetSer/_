@@ -1,6 +1,7 @@
 let dados = [];
 let indiceSelecionado = -1;
 let brilhoAtivo = false;
+let cursorGlow = null;
 
 let ordemAtual = {
   coluna: 'codigo',
@@ -98,25 +99,43 @@ function ordenarPor(coluna) {
 }
 
 // 🔥 SPARKLE
+function criarCursorGlow() {
+  if (cursorGlow) return;
+
+  cursorGlow = document.createElement("div");
+  cursorGlow.className = "cursor-glow";
+  document.body.appendChild(cursorGlow);
+}
+function removerCursorGlow() {
+  if (cursorGlow) {
+    cursorGlow.remove();
+    cursorGlow = null;
+  }
+}
 document.addEventListener("mousemove", (e) => {
   if (!brilhoAtivo) return;
 
-  // cria menos partículas (leve)
-  if (Math.random() < 0.3) {
-    criarBrilho(e.clientX, e.clientY);
+  if (cursorGlow) {
+    cursorGlow.style.left = e.clientX + "px";
+    cursorGlow.style.top = e.clientY + "px";
+  }
+
+  // rastro leve
+  if (Math.random() < 0.25) {
+    criarRastro(e.clientX, e.clientY);
   }
 });
 
-function criarBrilho(x, y) {
-  const brilho = document.createElement("div");
-  brilho.className = "sparkle";
+function criarRastro(x, y) {
+  const rastro = document.createElement("div");
+  rastro.className = "sparkle";
 
-  brilho.style.left = x + "px";
-  brilho.style.top = y + "px";
+  rastro.style.left = x + "px";
+  rastro.style.top = y + "px";
 
-  document.body.appendChild(brilho);
+  document.body.appendChild(rastro);
 
-  setTimeout(() => brilho.remove(), 600);
+  setTimeout(() => rastro.remove(), 700);
 }
 
 // 🔥 RENDERIZAÇÃO
@@ -126,9 +145,11 @@ function renderizar() {
   if (termo.includes("yasmin")) {
     document.body.classList.add("rainbow");
     brilhoAtivo = true;
+    criarCursorGlow();
   } else {
     document.body.classList.remove("rainbow");
     brilhoAtivo = false;
+    removerCursorGlow();
   }
   const tiposSelecionados = getTiposSelecionados();
 
