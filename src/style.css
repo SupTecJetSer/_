@@ -132,3 +132,16 @@ body {
       background: #ccc;
       border-radius: 10px;
     }
+    body.rainbow {
+      animation: rainbowBG 3s linear infinite;
+    }
+
+    @keyframes rainbowBG {
+      0%   { background-color: red; }
+      16%  { background-color: orange; }
+      33%  { background-color: yellow; }
+      50%  { background-color: green; }
+      66%  { background-color: blue; }
+      83%  { background-color: indigo; }
+      100% { background-color: violet; }
+    }
