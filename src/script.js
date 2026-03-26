@@ -2,7 +2,7 @@ let dados = [];
 let indiceSelecionado = -1;
 
 let ordemAtual = {
-  coluna: null,
+  coluna: 'codigo',
   asc: true
 };
 
