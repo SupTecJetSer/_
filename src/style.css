@@ -132,3 +132,38 @@ body {
       background: #ccc;
       border-radius: 10px;
     }
+    .easter-egg {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+    }
+
+    form:invalid::after {
+  animation: rainbow 3s linear infinite;
+  background-image: linear-gradient(
+    to right,
+    var(--red),
+    var(--orange),
+    var(--yellow),
+    var(--green),
+    var(--cyan),
+    var(--blue),
+    var(--violet),
+    var(--magenta),
+    var(--red)
+  );
+  background-size: 10000rem;
+  content: '';
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: -1;
+}
+
+@keyframes rainbow {
+  from  { background-position: left top }
+  to    { background-position: right top }
+}
