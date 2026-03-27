@@ -20,6 +20,13 @@ async function carregarDados() {
   }
 }
 
+function limparBusca() {
+  const input = document.getElementById('busca');
+  input.value = "";
+  input.focus();
+  renderizar();
+}
+
 // 🔥 COPIAR
 function copiarCodigo(codigo, el) {
   navigator.clipboard.writeText(codigo);
@@ -274,7 +281,13 @@ function renderizar() {
 }
 
 // 🔥 EVENTOS
-document.getElementById('busca').addEventListener('input', renderizar);
+const inputBusca = document.getElementById('busca');
+const btnLimpar = document.querySelector('.limpar');
+
+inputBusca.addEventListener('input', () => {
+  btnLimpar.style.display = inputBusca.value ? 'block' : 'none';
+  renderizar();
+});
 document.querySelectorAll('.filtros input')
   .forEach(el => el.addEventListener('change', renderizar));
 
