@@ -293,3 +293,36 @@ body.rainbow .copiado td {
 .nome-com-icone {
   cursor: pointer;
 }
+.input-box {
+  position: relative;
+  display: inline-block;
+}
+
+.input-box input {
+  padding-right: 35px; /* espaço pro X */
+}
+
+.limpar {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 14px;
+  color: #999;
+  display: none;
+}
+
+.limpar:hover {
+  color: #000;
+}
+
+.limpar {
+  opacity: 0;
+  transition: 0.2s;
+}
+
+.input-box input:not(:placeholder-shown) + .limpar {
+  opacity: 1;
+  display: block;
+}
