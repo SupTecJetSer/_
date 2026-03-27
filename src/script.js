@@ -243,7 +243,7 @@ function renderizar() {
         </td>
         <td>
           <span class="nome-com-icone" onclick="abrirPopup('${item.imagem || ''}')">
-            📍 ${item.nome}
+            ${item.nome}
           </span>
           <span class="badge ${item.tipo}">
             ${item.tipo}
