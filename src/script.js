@@ -18,7 +18,29 @@ async function carregarDados() {
   } catch (erro) {
     console.error("Erro ao carregar JSON:", erro);
   }
+  
 }
+// POP UP
+function abrirPopup(src) {
+  if (!src) return;
+
+  const popup = document.getElementById("popup");
+  const img = document.getElementById("popup-img");
+
+  img.src = src;
+  popup.classList.remove("hidden");
+}
+
+function fecharPopup() {
+  document.getElementById("popup").classList.add("hidden");
+}
+
+// fechar clicando fora
+document.getElementById("popup").addEventListener("click", function(e) {
+  if (e.target.id === "popup") {
+    fecharPopup();
+  }
+});
 
 // 🔥 COPIAR CÓDIGO
 function copiarCodigo(codigo, el) {
