@@ -96,7 +96,7 @@ document.addEventListener('keydown', function(e) {
 
     // 3️⃣ RESETAR CHECKBOXES
     checkboxes.forEach(cb => {
-      if (cb.checked) {
+      if (!cb.checked) {
         cb.checked = true;
         mudouAlgo = true;
       }
