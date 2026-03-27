@@ -71,9 +71,19 @@ function atualizarSelecao(linhas) {
 
 // 🔥 NAVEGAÇÃO
 document.addEventListener('keydown', function(e) {
-  if (e.key === "Escape") {
-    const input = document.getElementById('busca');
+  const input = document.getElementById('busca');
+  const popup = document.getElementById("popup");
 
+  // 🔥 ESC
+  if (e.key === "Escape") {
+
+    // 1️⃣ FECHAR POPUP (prioridade)
+    if (popup && !popup.classList.contains("hidden")) {
+      fecharPopup();
+      return;
+    }
+
+    // 2️⃣ LIMPAR BUSCA
     if (document.activeElement === input && input.value) {
       input.value = "";
 
@@ -81,11 +91,18 @@ document.addEventListener('keydown', function(e) {
       if (btnLimpar) btnLimpar.style.display = 'none';
 
       renderizar();
+      return;
+    }
+
+    // 3️⃣ SE JÁ ESTIVER LIMPO → TIRA FOCO
+    if (document.activeElement === input) {
+      input.blur();
     }
   }
-});
-document.addEventListener('keydown', function(e) {
+
+  // 🔥 SETAS + ENTER (mantém seu comportamento)
   const linhas = document.querySelectorAll('#tabela tr');
+
   if (!linhas.length) return;
 
   if (e.key === "ArrowDown") {
