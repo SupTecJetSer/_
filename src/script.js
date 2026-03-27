@@ -231,7 +231,9 @@ function renderizar() {
           ${item.codigo}
         </td>
         <td>
-          ${item.nome}
+          <span class="nome-com-icone" onclick="abrirPopup('${item.imagem || ''}')">
+            📍 ${item.nome}
+          </span>
           <span class="badge ${item.tipo}">
             ${item.tipo}
           </span>
