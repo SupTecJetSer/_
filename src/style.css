@@ -149,7 +149,7 @@ body.rainbow .tabela-container {
 }
 
 /* todas as linhas ficam rosa */
-body.rainbow #tabela tr {
+body.rainbow #tabela tr, .popup-content {
   background-color: Pink !important;
 }
 
