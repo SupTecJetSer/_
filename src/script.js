@@ -73,34 +73,48 @@ function atualizarSelecao(linhas) {
 document.addEventListener('keydown', function(e) {
   const input = document.getElementById('busca');
   const popup = document.getElementById("popup");
+  const checkboxes = document.querySelectorAll('.filtros input');
 
-  // 🔥 ESC
   if (e.key === "Escape") {
 
-    // 1️⃣ FECHAR POPUP (prioridade)
+    // 1️⃣ FECHAR POPUP
     if (popup && !popup.classList.contains("hidden")) {
       fecharPopup();
       return;
     }
 
     // 2️⃣ LIMPAR BUSCA
-    if (document.activeElement === input && input.value) {
+    let mudouAlgo = false;
+
+    if (input.value) {
       input.value = "";
+      mudouAlgo = true;
 
       const btnLimpar = document.querySelector('.limpar');
       if (btnLimpar) btnLimpar.style.display = 'none';
+    }
 
+    // 3️⃣ RESETAR CHECKBOXES
+    checkboxes.forEach(cb => {
+      if (cb.checked) {
+        cb.checked = false;
+        mudouAlgo = true;
+      }
+    });
+
+    // 4️⃣ ATUALIZA TABELA SE PRECISAR
+    if (mudouAlgo) {
       renderizar();
       return;
     }
 
-    // 3️⃣ SE JÁ ESTIVER LIMPO → TIRA FOCO
+    // 5️⃣ SE NÃO TINHA NADA → TIRA FOCO
     if (document.activeElement === input) {
       input.blur();
     }
   }
 
-  // 🔥 SETAS + ENTER (mantém seu comportamento)
+  // 🔥 SETAS + ENTER
   const linhas = document.querySelectorAll('#tabela tr');
 
   if (!linhas.length) return;
