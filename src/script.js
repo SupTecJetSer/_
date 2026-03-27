@@ -9,7 +9,7 @@ let ordemAtual = {
   asc: true
 };
 
-// 🔥 CARREGAR JSON DO GITHUB
+// 🔥 CARREGAR JSON
 async function carregarDados() {
   try {
     const res = await fetch("https://raw.githubusercontent.com/SupTecJetSer/_/refs/heads/main/dados.json?nocache=" + Date.now());
@@ -18,44 +18,19 @@ async function carregarDados() {
   } catch (erro) {
     console.error("Erro ao carregar JSON:", erro);
   }
-  
-}
-// POP UP
-function abrirPopup(src) {
-  if (!src) return;
-
-  const popup = document.getElementById("popup");
-  const img = document.getElementById("popup-img");
-
-  img.src = src;
-  popup.classList.remove("hidden");
 }
 
-function fecharPopup() {
-  document.getElementById("popup").classList.add("hidden");
-}
-
-// fechar clicando fora
-document.getElementById("popup").addEventListener("click", function(e) {
-  if (e.target.id === "popup") {
-    fecharPopup();
-  }
-});
-
-// 🔥 COPIAR CÓDIGO
+// 🔥 COPIAR
 function copiarCodigo(codigo, el) {
   navigator.clipboard.writeText(codigo);
 
   const icon = el.querySelector('.copy-btn');
   const linha = el.closest('tr');
 
-  if (el._copyTimeout) {
-    clearTimeout(el._copyTimeout);
-  }
+  if (el._copyTimeout) clearTimeout(el._copyTimeout);
 
   if (icon) {
     icon.innerHTML = "📝";
-
     el._copyTimeout = setTimeout(() => {
       icon.innerHTML = "";
     }, 1500);
@@ -74,7 +49,7 @@ function getTiposSelecionados() {
     .map(el => el.value);
 }
 
-// 🔥 SELEÇÃO COM TECLADO
+// 🔥 SELEÇÃO
 function atualizarSelecao(linhas) {
   linhas.forEach(l => l.classList.remove('selecionado'));
 
@@ -90,7 +65,6 @@ function atualizarSelecao(linhas) {
 // 🔥 NAVEGAÇÃO
 document.addEventListener('keydown', function(e) {
   const linhas = document.querySelectorAll('#tabela tr');
-
   if (!linhas.length) return;
 
   if (e.key === "ArrowDown") {
@@ -120,11 +94,10 @@ function ordenarPor(coluna) {
     ordemAtual.coluna = coluna;
     ordemAtual.asc = true;
   }
-
   renderizar();
 }
 
-// 🔥 EASTER / SPARKLE
+// 🔥 EASTER
 function ativarEaster() {
   document.body.classList.add("rainbow");
   criarCursorGlow();
@@ -137,6 +110,7 @@ function desativarEaster() {
   easterLigado = false;
 }
 
+// 🔥 CURSOR GLOW
 function criarCursorGlow() {
   if (cursorGlow) return;
 
@@ -152,7 +126,7 @@ function removerCursorGlow() {
   }
 }
 
-// 🔥 MOUSE GLOW + RASTRO
+// 🔥 MOUSE RASTRO MELHORADO
 document.addEventListener("mousemove", (e) => {
   if (!easterLigado) return;
 
@@ -161,7 +135,7 @@ document.addEventListener("mousemove", (e) => {
     cursorGlow.style.top = e.clientY + "px";
   }
 
-  // mais partículas por movimento
+  // mais partículas
   for (let i = 0; i < 3; i++) {
     criarRastro(
       e.clientX + (Math.random() - 0.5) * 10,
@@ -182,19 +156,38 @@ function criarRastro(x, y) {
   setTimeout(() => rastro.remove(), 1500);
 }
 
-// 🔥 RENDERIZAÇÃO
+// 🔥 POPUP
+function abrirPopup(src) {
+  if (!src) return;
+
+  const popup = document.getElementById("popup");
+  const img = document.getElementById("popup-img");
+
+  img.src = src;
+  popup.classList.remove("hidden");
+}
+
+function fecharPopup() {
+  document.getElementById("popup").classList.add("hidden");
+}
+
+// fechar clicando fora
+document.addEventListener("click", function(e) {
+  const popup = document.getElementById("popup");
+  if (e.target.id === "popup") {
+    fecharPopup();
+  }
+});
+
+// 🔥 RENDER
 function renderizar() {
   const buscaInput = document.getElementById('busca');
-  const termoOriginal = buscaInput.value;
-  const termo = termoOriginal.toLowerCase();
+  const termo = buscaInput.value.toLowerCase();
 
-  // 🔥 DETECTA PALAVRA SECRETA
+  // easter egg
   if (termo.includes("yasmin") && !ultimoEstadoBusca.includes("yasmin")) {
-    if (easterLigado) {
-      desativarEaster();
-    } else {
-      ativarEaster();
-    }
+    if (easterLigado) desativarEaster();
+    else ativarEaster();
 
     buscaInput.value = "";
 
@@ -215,13 +208,10 @@ function renderizar() {
       const codigo = (item.codigo || "").toLowerCase();
       const nome = (item.nome || "").toLowerCase();
 
-      const matchBusca =
-        codigo.includes(termo) ||
-        nome.includes(termo);
-
-      const matchTipo = tiposSelecionados.includes(item.tipo);
-
-      return matchBusca && matchTipo;
+      return (
+        (codigo.includes(termo) || nome.includes(termo)) &&
+        tiposSelecionados.includes(item.tipo)
+      );
     })
     .sort((a, b) => {
       let valorA = a[ordemAtual.coluna];
@@ -236,9 +226,8 @@ function renderizar() {
       valorA = String(valorA).toLowerCase();
       valorB = String(valorB).toLowerCase();
 
-      const comparacao = valorA.localeCompare(valorB, 'pt-BR');
-
-      return ordemAtual.asc ? comparacao : -comparacao;
+      const comp = valorA.localeCompare(valorB, 'pt-BR');
+      return ordemAtual.asc ? comp : -comp;
     });
 
   const tabela = document.getElementById('tabela');
@@ -266,7 +255,7 @@ function renderizar() {
 
   tabela.innerHTML = html;
 
-  // 🔥 CORRIGE SETAS
+  // setas ordenação
   document.querySelectorAll('th').forEach(th => {
     th.innerHTML = th.dataset.label;
   });
@@ -281,9 +270,8 @@ function renderizar() {
 
 // 🔥 EVENTOS
 document.getElementById('busca').addEventListener('input', renderizar);
-
 document.querySelectorAll('.filtros input')
   .forEach(el => el.addEventListener('change', renderizar));
 
-// 🔥 INICIAR
+// 🔥 INIT
 carregarDados();
