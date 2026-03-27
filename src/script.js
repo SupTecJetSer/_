@@ -71,6 +71,20 @@ function atualizarSelecao(linhas) {
 
 // 🔥 NAVEGAÇÃO
 document.addEventListener('keydown', function(e) {
+  if (e.key === "Escape") {
+    const input = document.getElementById('busca');
+
+    if (document.activeElement === input && input.value) {
+      input.value = "";
+
+      const btnLimpar = document.querySelector('.limpar');
+      if (btnLimpar) btnLimpar.style.display = 'none';
+
+      renderizar();
+    }
+  }
+});
+document.addEventListener('keydown', function(e) {
   const linhas = document.querySelectorAll('#tabela tr');
   if (!linhas.length) return;
 
