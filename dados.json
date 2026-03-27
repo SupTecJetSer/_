@@ -17,17 +17,17 @@
 	"tipo": "sulfite",
 	"codigo": "V14289",
 	"nome": "PACOTE SULFITE A4 75GR AUTOPAPER",
-	"imagem": ""
+	"imagem": "autopaper.png"
 },{
 	"tipo": "sulfite",
 	"codigo": "03071740343",
 	"nome": "PACOTE SULFITE A4 75GR CHAMEX",
-	"imagem": ""
+	"imagem": "chamex.png"
 },{
 	"tipo": "sulfite",
 	"codigo": "000000000020091915",
 	"nome": "PACOTE SULFITE A4 75GR REPORT",
-	"imagem": ""
+	"imagem": "report.png"
 },{
 	"tipo": "compativel",
 	"codigo": "15554-0",
