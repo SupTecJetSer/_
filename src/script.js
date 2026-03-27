@@ -247,7 +247,7 @@ function renderizar() {
           ${item.codigo}
         </td>
         <td>
-          <span class="nome-com-icone" onclick="abrirPopup('${item.imagem ? 'loc/' + item.imagem : ''}')" style="${!item.imagem ? 'opacity:0.5;cursor:default;' : ''}">
+          <span class="nome-com-icone" onclick="abrirPopup('${item.imagem ? 'loc/' + item.imagem : ''}')" style="${!item.imagem ? 'cursor:default;' : ''}">
             ${item.nome}
           </span>
           <span class="badge ${item.tipo}">
