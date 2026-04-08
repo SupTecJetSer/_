@@ -1,5 +1,195 @@
 [{
 	"tipo": "compativel",
+	"codigo": "",
+	"nome": "217",
+	"imagem": "217.jpg"
+},{
+	"tipo": "compativel",
+	"codigo": "",
+	"nome": "218",
+	"imagem": "218.jpg"
+},{
+	"tipo": "compativel",
+	"codigo": "",
+	"nome": "219",
+	"imagem": "219.jpg"
+},{
+	"tipo": "compativel",
+	"codigo": "",
+	"nome": "226a",
+	"imagem": "226a.jpg"
+},{
+	"tipo": "compativel",
+	"codigo": "",
+	"nome": "226x",
+	"imagem": "226x.jpg"
+},{
+	"tipo": "compativel",
+	"codigo": "",
+	"nome": "248",
+	"imagem": "248.jpg"
+},{
+	"tipo": "compativel",
+	"codigo": "",
+	"nome": "255x",
+	"imagem": "255x.jpg"
+},{
+	"tipo": "compativel",
+	"codigo": "",
+	"nome": "258x com chip",
+	"imagem": "258xcc.jpg"
+},{
+	"tipo": "compativel",
+	"codigo": "",
+	"nome": "258x sem chip",
+	"imagem": "258xsc.jpg"
+},{
+	"tipo": "compativel",
+	"codigo": "",
+	"nome": "364a",
+	"imagem": "364a.jpg"
+},{
+	"tipo": "compativel",
+	"codigo": "",
+	"nome": "364a",
+	"imagem": "364x.jpg"
+},{
+	"tipo": "compativel",
+	"codigo": "",
+	"nome": "505x",
+	"imagem": "505x.jpg"
+},{
+	"tipo": "compativel",
+	"codigo": "",
+	"nome": "1030x com chip",
+	"imagem": "1030xcc.jpg"
+},{
+	"tipo": "compativel",
+	"codigo": "",
+	"nome": "1103",
+	"imagem": "1103.jpg"
+},{
+	"tipo": "compativel",
+	"codigo": "",
+	"nome": "1610",
+	"imagem": "1610.jpg"
+},{
+	"tipo": "compativel",
+	"codigo": "",
+	"nome": "x3020",
+	"imagem": "3020.jpg"
+},{
+	"tipo": "compativel",
+	"codigo": "",
+	"nome": "tn3442",
+	"imagem": "3442.jpg"
+},{
+	"tipo": "compativel",
+	"codigo": "",
+	"nome": "tn3472",
+	"imagem": "3472.jpg"
+},{
+	"tipo": "compativel",
+	"codigo": "",
+	"nome": "tn3492",
+	"imagem": "3492.jpg"
+},{
+	"tipo": "compativel",
+	"codigo": "",
+	"nome": "4200",
+	"imagem": "4200.jpg"
+},{
+	"tipo": "compativel",
+	"codigo": "",
+	"nome": "5949x",
+	"imagem": "5949x.jpg"
+},{
+	"tipo": "compativel",
+	"codigo": "",
+	"nome": "7551x",
+	"imagem": "7551x.jpg"
+},{
+	"tipo": "compativel",
+	"codigo": "",
+	"nome": "b021",
+	"imagem": "b021.jpg"
+},{
+	"tipo": "compativel",
+	"codigo": "",
+	"nome": "tn760",
+	"imagem": "tn760.jpg"
+},{
+	"tipo": "compativel",
+	"codigo": "",
+	"nome": "d101",
+	"imagem": "d101.jpg"
+},{
+	"tipo": "compativel",
+	"codigo": "",
+	"nome": "d105",
+	"imagem": "d105.jpg"
+},{
+	"tipo": "compativel",
+	"codigo": "",
+	"nome": "d116",
+	"imagem": "d116.jpg"
+},{
+	"tipo": "compativel",
+	"codigo": "",
+	"nome": "dr116",
+	"imagem": "dr116.jpg"
+},{
+	"tipo": "compativel",
+	"codigo": "",
+	"nome": "dr410",
+	"imagem": "dr410.jpg"
+},{
+	"tipo": "compativel",
+	"codigo": "",
+	"nome": "dr660",
+	"imagem": "dr660.jpg"
+},{
+	"tipo": "compativel",
+	"codigo": "",
+	"nome": "dr760",
+	"imagem": "dr760.jpg"
+},{
+	"tipo": "compativel",
+	"codigo": "",
+	"nome": "dr880",
+	"imagem": "dr880.jpg"
+},{
+	"tipo": "compativel",
+	"codigo": "",
+	"nome": "dr1060",
+	"imagem": "dr1060.jpg"
+},{
+	"tipo": "compativel",
+	"codigo": "",
+	"nome": "dr580 650",
+	"imagem": "dr580650.jpg"
+},{
+	"tipo": "compativel",
+	"codigo": "",
+	"nome": "drb021",
+	"imagem": "drb021.jpg"
+},{
+	"tipo": "compativel",
+	"codigo": "",
+	"nome": "tn360",
+	"imagem": "tn360.jpg"
+},{
+	"tipo": "compativel",
+	"codigo": "",
+	"nome": "tn580 650",
+	"imagem": "tn580650.jpg"
+},{
+	"tipo": "compativel",
+	"codigo": "",
+	"nome": "tn720 750",
+	"imagem": "tn720750.jpg"
+},{
+	"tipo": "compativel",
 	"codigo": "15900-0",
 	"nome": "TONER COMP HP W2150X W2300X 230X BLACK C/C EVOLUT SUPREME",
 	"imagem": ""
